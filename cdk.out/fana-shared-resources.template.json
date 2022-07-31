@@ -1,0 +1,958 @@
+{
+ "Resources": {
+  "fanavpc71F92CF5": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "fana-shared-resources/fana-vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/Resource"
+   }
+  },
+  "fanavpcPublicSubnet1Subnet5496124E": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "fanavpc71F92CF5"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "fana-shared-resources/fana-vpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/PublicSubnet1/Subnet"
+   }
+  },
+  "fanavpcPublicSubnet1RouteTable2C323360": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "fanavpc71F92CF5"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "fana-shared-resources/fana-vpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/PublicSubnet1/RouteTable"
+   }
+  },
+  "fanavpcPublicSubnet1RouteTableAssociationEC618F57": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "fanavpcPublicSubnet1RouteTable2C323360"
+    },
+    "SubnetId": {
+     "Ref": "fanavpcPublicSubnet1Subnet5496124E"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/PublicSubnet1/RouteTableAssociation"
+   }
+  },
+  "fanavpcPublicSubnet1DefaultRoute7B89BCF6": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "fanavpcPublicSubnet1RouteTable2C323360"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "fanavpcIGW649C036C"
+    }
+   },
+   "DependsOn": [
+    "fanavpcVPCGW4325FC9C"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/PublicSubnet1/DefaultRoute"
+   }
+  },
+  "fanavpcPublicSubnet1EIP6A8F71C3": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "fana-shared-resources/fana-vpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/PublicSubnet1/EIP"
+   }
+  },
+  "fanavpcPublicSubnet1NATGatewayA0C272D5": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "fanavpcPublicSubnet1Subnet5496124E"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "fanavpcPublicSubnet1EIP6A8F71C3",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "fana-shared-resources/fana-vpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/PublicSubnet1/NATGateway"
+   }
+  },
+  "fanavpcPublicSubnet2Subnet0CE84D65": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "fanavpc71F92CF5"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "fana-shared-resources/fana-vpc/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/PublicSubnet2/Subnet"
+   }
+  },
+  "fanavpcPublicSubnet2RouteTableCAB4CBC8": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "fanavpc71F92CF5"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "fana-shared-resources/fana-vpc/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/PublicSubnet2/RouteTable"
+   }
+  },
+  "fanavpcPublicSubnet2RouteTableAssociation520326D7": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "fanavpcPublicSubnet2RouteTableCAB4CBC8"
+    },
+    "SubnetId": {
+     "Ref": "fanavpcPublicSubnet2Subnet0CE84D65"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/PublicSubnet2/RouteTableAssociation"
+   }
+  },
+  "fanavpcPublicSubnet2DefaultRoute2DF95639": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "fanavpcPublicSubnet2RouteTableCAB4CBC8"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "fanavpcIGW649C036C"
+    }
+   },
+   "DependsOn": [
+    "fanavpcVPCGW4325FC9C"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/PublicSubnet2/DefaultRoute"
+   }
+  },
+  "fanavpcPublicSubnet2EIP3D8BF1CC": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "fana-shared-resources/fana-vpc/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/PublicSubnet2/EIP"
+   }
+  },
+  "fanavpcPublicSubnet2NATGateway77E2874A": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "fanavpcPublicSubnet2Subnet0CE84D65"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "fanavpcPublicSubnet2EIP3D8BF1CC",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "fana-shared-resources/fana-vpc/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/PublicSubnet2/NATGateway"
+   }
+  },
+  "fanavpcPrivateSubnet1Subnet5472B4A7": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "fanavpc71F92CF5"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "fana-shared-resources/fana-vpc/PrivateSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/PrivateSubnet1/Subnet"
+   }
+  },
+  "fanavpcPrivateSubnet1RouteTable8DA6B7D2": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "fanavpc71F92CF5"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "fana-shared-resources/fana-vpc/PrivateSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/PrivateSubnet1/RouteTable"
+   }
+  },
+  "fanavpcPrivateSubnet1RouteTableAssociation36FCC44E": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "fanavpcPrivateSubnet1RouteTable8DA6B7D2"
+    },
+    "SubnetId": {
+     "Ref": "fanavpcPrivateSubnet1Subnet5472B4A7"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/PrivateSubnet1/RouteTableAssociation"
+   }
+  },
+  "fanavpcPrivateSubnet1DefaultRoute4DF6002C": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "fanavpcPrivateSubnet1RouteTable8DA6B7D2"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "fanavpcPublicSubnet1NATGatewayA0C272D5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/PrivateSubnet1/DefaultRoute"
+   }
+  },
+  "fanavpcPrivateSubnet2Subnet5043D216": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "fanavpc71F92CF5"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "fana-shared-resources/fana-vpc/PrivateSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/PrivateSubnet2/Subnet"
+   }
+  },
+  "fanavpcPrivateSubnet2RouteTable72394251": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "fanavpc71F92CF5"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "fana-shared-resources/fana-vpc/PrivateSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/PrivateSubnet2/RouteTable"
+   }
+  },
+  "fanavpcPrivateSubnet2RouteTableAssociation682F5FFB": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "fanavpcPrivateSubnet2RouteTable72394251"
+    },
+    "SubnetId": {
+     "Ref": "fanavpcPrivateSubnet2Subnet5043D216"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/PrivateSubnet2/RouteTableAssociation"
+   }
+  },
+  "fanavpcPrivateSubnet2DefaultRoute3D486D67": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "fanavpcPrivateSubnet2RouteTable72394251"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "fanavpcPublicSubnet2NATGateway77E2874A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/PrivateSubnet2/DefaultRoute"
+   }
+  },
+  "fanavpcIGW649C036C": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "fana-shared-resources/fana-vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/IGW"
+   }
+  },
+  "fanavpcVPCGW4325FC9C": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "VpcId": {
+     "Ref": "fanavpc71F92CF5"
+    },
+    "InternetGatewayId": {
+     "Ref": "fanavpcIGW649C036C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-vpc/VPCGW"
+   }
+  },
+  "fanaclusterB441A15A": {
+   "Type": "AWS::ECS::Cluster",
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-cluster/Resource"
+   }
+  },
+  "fanaredistestfanaredistestsubnetgroup8AA53573": {
+   "Type": "AWS::ElastiCache::SubnetGroup",
+   "Properties": {
+    "Description": "Subnets used for redis cache fana-redis-test",
+    "SubnetIds": [
+     {
+      "Ref": "fanavpcPublicSubnet1Subnet5496124E"
+     },
+     {
+      "Ref": "fanavpcPublicSubnet2Subnet0CE84D65"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-redis-test/fana-redis-test-subnet-group"
+   }
+  },
+  "fanaredistestSGfanaredistest8F8EE3FC": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Allows TCP connections to port 6379",
+    "GroupName": "fana-redis-SG",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "fanavpc71F92CF5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-redis-test/SG-fana-redis-test/Resource"
+   }
+  },
+  "fanaredistestfanaredistestclusterD26287DD": {
+   "Type": "AWS::ElastiCache::CacheCluster",
+   "Properties": {
+    "CacheNodeType": "cache.t2.micro",
+    "Engine": "redis",
+    "NumCacheNodes": 1,
+    "AutoMinorVersionUpgrade": true,
+    "CacheSubnetGroupName": {
+     "Ref": "fanaredistestfanaredistestsubnetgroup8AA53573"
+    },
+    "ClusterName": "fana-redis-testCluster",
+    "VpcSecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "fanaredistestSGfanaredistest8F8EE3FC",
+       "GroupId"
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fana-redis-test/fana-redis-test-cluster"
+   }
+  },
+  "fanaDBSubnetGroupBF989B71": {
+   "Type": "AWS::RDS::DBSubnetGroup",
+   "Properties": {
+    "DBSubnetGroupDescription": "Subnet group for fanaDB database",
+    "SubnetIds": [
+     {
+      "Ref": "fanavpcPrivateSubnet1Subnet5472B4A7"
+     },
+     {
+      "Ref": "fanavpcPrivateSubnet2Subnet5043D216"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fanaDB/SubnetGroup/Default"
+   }
+  },
+  "fanaDBSecurityGroupC50F2AF4": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Security group for fanaDB database",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "fanavpc71F92CF5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fanaDB/SecurityGroup/Resource"
+   }
+  },
+  "fanasharedresourcesfanaDBSecret465B7F2C3fdaad7efa858a3daf9490cf0a702aeb": {
+   "Type": "AWS::SecretsManager::Secret",
+   "Properties": {
+    "Description": {
+     "Fn::Join": [
+      "",
+      [
+       "Generated by the CDK for stack: ",
+       {
+        "Ref": "AWS::StackName"
+       }
+      ]
+     ]
+    },
+    "GenerateSecretString": {
+     "ExcludeCharacters": " %+~`#$&*()|[]{}:;<>?!'/@\"\\",
+     "GenerateStringKey": "password",
+     "PasswordLength": 30,
+     "SecretStringTemplate": "{\"username\":\"postgres\"}"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fanaDB/Secret/Resource"
+   }
+  },
+  "fanaDBSecretAttachment91372E9C": {
+   "Type": "AWS::SecretsManager::SecretTargetAttachment",
+   "Properties": {
+    "SecretId": {
+     "Ref": "fanasharedresourcesfanaDBSecret465B7F2C3fdaad7efa858a3daf9490cf0a702aeb"
+    },
+    "TargetId": {
+     "Ref": "fanaDBA214E5A4"
+    },
+    "TargetType": "AWS::RDS::DBInstance"
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fanaDB/Secret/Attachment/Resource"
+   }
+  },
+  "fanaDBA214E5A4": {
+   "Type": "AWS::RDS::DBInstance",
+   "Properties": {
+    "DBInstanceClass": "db.t3.small",
+    "AllocatedStorage": "100",
+    "CopyTagsToSnapshot": true,
+    "DBName": "fanaPostgres",
+    "DBSubnetGroupName": {
+     "Ref": "fanaDBSubnetGroupBF989B71"
+    },
+    "Engine": "postgres",
+    "EngineVersion": "14.2",
+    "MasterUsername": "postgres",
+    "MasterUserPassword": {
+     "Fn::Join": [
+      "",
+      [
+       "{{resolve:secretsmanager:",
+       {
+        "Ref": "fanasharedresourcesfanaDBSecret465B7F2C3fdaad7efa858a3daf9490cf0a702aeb"
+       },
+       ":SecretString:password::}}"
+      ]
+     ]
+    },
+    "StorageType": "gp2",
+    "VPCSecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "fanaDBSecurityGroupC50F2AF4",
+       "GroupId"
+      ]
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Snapshot",
+   "DeletionPolicy": "Snapshot",
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/fanaDB/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/11RTW/CMAz9LbuHbGObtCu0E+plqgBxndzUY4E2QbEDQlX/+1JCP8TJL8/PT8/OXL69y5cnuNBMlcdZpQvZbBjUUQTqp0E1l83upETya3Z5InJfVFptfGGQO25Ea+sZt1BUOPIjtyCySgNrawZxB76yvCvfwCtgvMBV5E6fAxyNM8PoAu4FMcn9teCQ9a9Gw2KDyjvN15Wz/nTLMCVagYpkk1Segl3XvsPQqIBYq+CDQdBnH2ySrjGIXRlcUmAogDAzxGAUioeRdDklenXI4+JK6bKfbAXdWKrBwB5dDBCFsWzB7ZEnew6Cx07bijWS9U7dTjvFiTWl7o7fCmNLlAd6Pr9+yo/w8wfSeua8YV2jXMf6D7MWiOMVAgAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "fana-shared-resources/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Conditions": {
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-2"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "Outputs": {
+  "ExportsOutputFnGetAttfanaredistestfanaredistestclusterD26287DDRedisEndpointAddressA128D182": {
+   "Value": {
+    "Fn::GetAtt": [
+     "fanaredistestfanaredistestclusterD26287DD",
+     "RedisEndpoint.Address"
+    ]
+   },
+   "Export": {
+    "Name": "fana-shared-resources:ExportsOutputFnGetAttfanaredistestfanaredistestclusterD26287DDRedisEndpointAddressA128D182"
+   }
+  },
+  "ExportsOutputFnGetAttfanaredistestfanaredistestclusterD26287DDRedisEndpointPortB1ABE103": {
+   "Value": {
+    "Fn::GetAtt": [
+     "fanaredistestfanaredistestclusterD26287DD",
+     "RedisEndpoint.Port"
+    ]
+   },
+   "Export": {
+    "Name": "fana-shared-resources:ExportsOutputFnGetAttfanaredistestfanaredistestclusterD26287DDRedisEndpointPortB1ABE103"
+   }
+  },
+  "ExportsOutputFnGetAttfanaDBA214E5A4EndpointAddressB31405B0": {
+   "Value": {
+    "Fn::GetAtt": [
+     "fanaDBA214E5A4",
+     "Endpoint.Address"
+    ]
+   },
+   "Export": {
+    "Name": "fana-shared-resources:ExportsOutputFnGetAttfanaDBA214E5A4EndpointAddressB31405B0"
+   }
+  },
+  "ExportsOutputFnGetAttfanaDBA214E5A4EndpointPortA2F54514": {
+   "Value": {
+    "Fn::GetAtt": [
+     "fanaDBA214E5A4",
+     "Endpoint.Port"
+    ]
+   },
+   "Export": {
+    "Name": "fana-shared-resources:ExportsOutputFnGetAttfanaDBA214E5A4EndpointPortA2F54514"
+   }
+  },
+  "ExportsOutputReffanaclusterB441A15AC8EDF09F": {
+   "Value": {
+    "Ref": "fanaclusterB441A15A"
+   },
+   "Export": {
+    "Name": "fana-shared-resources:ExportsOutputReffanaclusterB441A15AC8EDF09F"
+   }
+  },
+  "ExportsOutputReffanavpcPrivateSubnet1Subnet5472B4A7D62B11CA": {
+   "Value": {
+    "Ref": "fanavpcPrivateSubnet1Subnet5472B4A7"
+   },
+   "Export": {
+    "Name": "fana-shared-resources:ExportsOutputReffanavpcPrivateSubnet1Subnet5472B4A7D62B11CA"
+   }
+  },
+  "ExportsOutputReffanavpcPrivateSubnet2Subnet5043D2161B070C6D": {
+   "Value": {
+    "Ref": "fanavpcPrivateSubnet2Subnet5043D216"
+   },
+   "Export": {
+    "Name": "fana-shared-resources:ExportsOutputReffanavpcPrivateSubnet2Subnet5043D2161B070C6D"
+   }
+  },
+  "ExportsOutputReffanavpc71F92CF5BBA8AEF7": {
+   "Value": {
+    "Ref": "fanavpc71F92CF5"
+   },
+   "Export": {
+    "Name": "fana-shared-resources:ExportsOutputReffanavpc71F92CF5BBA8AEF7"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
