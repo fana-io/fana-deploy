@@ -2,7 +2,7 @@
 
 const cdk = require('aws-cdk-lib');
 const { FanaStack } = require('../lib/fanaStack');
-const { SharedResources } = require('../lib/sharedResources');
+const SharedResources = require('../lib/sharedResources');
 
 const app = new cdk.App();
 const shared = new SharedResources(app, 'fana-shared-resources');
@@ -23,4 +23,4 @@ new FanaStack(app, 'FanaPlatformStack', {
   // env: { account: '123456789012', region: 'us-east-1' },
 
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
-}).synth();
+})
