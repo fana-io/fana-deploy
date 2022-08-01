@@ -75,3 +75,50 @@ https://stackoverflow.com/questions/71206122/adding-rule-to-the-security-group-w
 This turned out to be easier than I thought- you can just flip the connection so that rather than trying to modify the rds to accept a security group of the ecs, you use the allowTo to establish a connection to the rds instance.
 
     ecsSG.connections.allowTo(props.rds, ec2.Port.tcp(5432), 'RDS Instance');
+
+
+# LB Service
+ - Create a LB with a security group that can take traffic from the internet
+  - Add a listener that listens on port 80 using HTTP protocol that forwards traffic to a target group
+  - Create a target group
+    - Target type: IP
+    - Protocol: http on port 3000
+  
+  - Register Target to Target group
+    - add to VPC
+    - Specify IPs ??? IPv4 address
+    - define ports for routing to this target
+
+
+Target group auto created with ApplicationLoadBalancedFargateService
+- automatically adds first container as a registered target
+
+
+## Not tried
+// Use this function to create all load balancer targets to be registered in this service, add them to target groups, and attach target groups to listeners accordingly.
+      // params: array of EcsTargets
+
+
+        fanaFargateService.service.registerLoadBalancerTargets(
+      {
+        containerName: 'fanaBearerContainer',
+        containerPort: 3001,
+        newTargetGroupId: 'ECS',
+        listener: ecs.ListenerConfig.applicationListener(listener, {
+          conditions: [
+            elbv2.ListenerCondition.pathPatterns(['/connect*', `/stream*`]),
+          ],
+          port: 80,
+          protocol: elbv2.ApplicationProtocol.HTTP,
+          priority: 12,
+        }),
+      },
+    );
+
+        fanaFargateService.listener.addTargetGroups('bearer-targetgroup', {
+      targetGroups: [fbTargetGroup],
+      conditions: [
+        elbv2.ListenerCondition.pathPatterns(['/connect*', `/stream*`]),
+      ],
+      priority: 12,
+    });

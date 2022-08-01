@@ -865,6 +865,22 @@
     "Name": "fana-shared-resources:ExportsOutputFnGetAttfanaredistestSGfanaredistest8F8EE3FCGroupIdEEC67E99"
    }
   },
+  "ExportsOutputReffanavpcPublicSubnet1Subnet5496124ECC30E9DE": {
+   "Value": {
+    "Ref": "fanavpcPublicSubnet1Subnet5496124E"
+   },
+   "Export": {
+    "Name": "fana-shared-resources:ExportsOutputReffanavpcPublicSubnet1Subnet5496124ECC30E9DE"
+   }
+  },
+  "ExportsOutputReffanavpcPublicSubnet2Subnet0CE84D659B0D89D9": {
+   "Value": {
+    "Ref": "fanavpcPublicSubnet2Subnet0CE84D65"
+   },
+   "Export": {
+    "Name": "fana-shared-resources:ExportsOutputReffanavpcPublicSubnet2Subnet0CE84D659B0D89D9"
+   }
+  },
   "ExportsOutputReffanaclusterB441A15AC8EDF09F": {
    "Value": {
     "Ref": "fanaclusterB441A15A"

@@ -972,6 +972,22 @@
                   "version": "2.34.0"
                 }
               },
+              "Output{\"Ref\":\"fanavpcPublicSubnet1Subnet5496124E\"}": {
+                "id": "Output{\"Ref\":\"fanavpcPublicSubnet1Subnet5496124E\"}",
+                "path": "fana-shared-resources/Exports/Output{\"Ref\":\"fanavpcPublicSubnet1Subnet5496124E\"}",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.34.0"
+                }
+              },
+              "Output{\"Ref\":\"fanavpcPublicSubnet2Subnet0CE84D65\"}": {
+                "id": "Output{\"Ref\":\"fanavpcPublicSubnet2Subnet0CE84D65\"}",
+                "path": "fana-shared-resources/Exports/Output{\"Ref\":\"fanavpcPublicSubnet2Subnet0CE84D65\"}",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.34.0"
+                }
+              },
               "Output{\"Ref\":\"fanaclusterB441A15A\"}": {
                 "id": "Output{\"Ref\":\"fanaclusterB441A15A\"}",
                 "path": "fana-shared-resources/Exports/Output{\"Ref\":\"fanaclusterB441A15A\"}",
@@ -1444,6 +1460,64 @@
                   "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
                   "version": "2.34.0"
                 }
+              },
+              "from FanaPlatformStackfanaserviceLBSecurityGroup3F47A229:3000": {
+                "id": "from FanaPlatformStackfanaserviceLBSecurityGroup3F47A229:3000",
+                "path": "FanaPlatformStack/fana-service-SG/from FanaPlatformStackfanaserviceLBSecurityGroup3F47A229:3000",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "ipProtocol": "tcp",
+                    "description": "Load balancer to target",
+                    "fromPort": 3000,
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "fanaserviceSG30294B9D",
+                        "GroupId"
+                      ]
+                    },
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "fanaserviceLBSecurityGroup1E8FAB95",
+                        "GroupId"
+                      ]
+                    },
+                    "toPort": 3000
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.34.0"
+                }
+              },
+              "from FanaPlatformStackfanaserviceLBSecurityGroup3F47A229:3001": {
+                "id": "from FanaPlatformStackfanaserviceLBSecurityGroup3F47A229:3001",
+                "path": "FanaPlatformStack/fana-service-SG/from FanaPlatformStackfanaserviceLBSecurityGroup3F47A229:3001",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "ipProtocol": "tcp",
+                    "description": "Load balancer to target",
+                    "fromPort": 3001,
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "fanaserviceSG30294B9D",
+                        "GroupId"
+                      ]
+                    },
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "fanaserviceLBSecurityGroup1E8FAB95",
+                        "GroupId"
+                      ]
+                    },
+                    "toPort": 3001
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.34.0"
+                }
               }
             },
             "constructInfo": {
@@ -1455,55 +1529,393 @@
             "id": "fana-service",
             "path": "FanaPlatformStack/fana-service",
             "children": {
-              "Service": {
-                "id": "Service",
-                "path": "FanaPlatformStack/fana-service/Service",
-                "attributes": {
-                  "aws:cdk:cloudformation:type": "AWS::ECS::Service",
-                  "aws:cdk:cloudformation:props": {
-                    "cluster": {
-                      "Fn::ImportValue": "fana-shared-resources:ExportsOutputReffanaclusterB441A15AC8EDF09F"
-                    },
-                    "deploymentConfiguration": {
-                      "maximumPercent": 200,
-                      "minimumHealthyPercent": 50
-                    },
-                    "enableEcsManagedTags": false,
-                    "launchType": "FARGATE",
-                    "networkConfiguration": {
-                      "awsvpcConfiguration": {
-                        "assignPublicIp": "DISABLED",
-                        "subnets": [
+              "LB": {
+                "id": "LB",
+                "path": "FanaPlatformStack/fana-service/LB",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "FanaPlatformStack/fana-service/LB/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+                      "aws:cdk:cloudformation:props": {
+                        "loadBalancerAttributes": [
                           {
-                            "Fn::ImportValue": "fana-shared-resources:ExportsOutputReffanavpcPrivateSubnet1Subnet5472B4A7D62B11CA"
-                          },
-                          {
-                            "Fn::ImportValue": "fana-shared-resources:ExportsOutputReffanavpcPrivateSubnet2Subnet5043D2161B070C6D"
+                            "key": "deletion_protection.enabled",
+                            "value": "false"
                           }
                         ],
+                        "name": "fana-LB",
+                        "scheme": "internet-facing",
                         "securityGroups": [
                           {
                             "Fn::GetAtt": [
-                              "fanaserviceSG30294B9D",
+                              "fanaserviceLBSecurityGroup1E8FAB95",
                               "GroupId"
                             ]
                           }
-                        ]
+                        ],
+                        "subnets": [
+                          {
+                            "Fn::ImportValue": "fana-shared-resources:ExportsOutputReffanavpcPublicSubnet1Subnet5496124ECC30E9DE"
+                          },
+                          {
+                            "Fn::ImportValue": "fana-shared-resources:ExportsOutputReffanavpcPublicSubnet2Subnet0CE84D659B0D89D9"
+                          }
+                        ],
+                        "type": "application"
                       }
                     },
-                    "taskDefinition": {
-                      "Ref": "fanaServiceTaskDefinition7714E28D"
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnLoadBalancer",
+                      "version": "2.34.0"
+                    }
+                  },
+                  "SecurityGroup": {
+                    "id": "SecurityGroup",
+                    "path": "FanaPlatformStack/fana-service/LB/SecurityGroup",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "FanaPlatformStack/fana-service/LB/SecurityGroup/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                          "aws:cdk:cloudformation:props": {
+                            "groupDescription": "Automatically created Security Group for ELB FanaPlatformStackfanaserviceLBAE36CF36",
+                            "securityGroupIngress": [
+                              {
+                                "cidrIp": "0.0.0.0/0",
+                                "ipProtocol": "tcp",
+                                "fromPort": 80,
+                                "toPort": 80,
+                                "description": "Allow from anyone on port 80"
+                              }
+                            ],
+                            "vpcId": {
+                              "Fn::ImportValue": "fana-shared-resources:ExportsOutputReffanavpc71F92CF5BBA8AEF7"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                          "version": "2.34.0"
+                        }
+                      },
+                      "to FanaPlatformStackfanaserviceSG5094F012:3000": {
+                        "id": "to FanaPlatformStackfanaserviceSG5094F012:3000",
+                        "path": "FanaPlatformStack/fana-service/LB/SecurityGroup/to FanaPlatformStackfanaserviceSG5094F012:3000",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupEgress",
+                          "aws:cdk:cloudformation:props": {
+                            "groupId": {
+                              "Fn::GetAtt": [
+                                "fanaserviceLBSecurityGroup1E8FAB95",
+                                "GroupId"
+                              ]
+                            },
+                            "ipProtocol": "tcp",
+                            "description": "Load balancer to target",
+                            "destinationSecurityGroupId": {
+                              "Fn::GetAtt": [
+                                "fanaserviceSG30294B9D",
+                                "GroupId"
+                              ]
+                            },
+                            "fromPort": 3000,
+                            "toPort": 3000
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupEgress",
+                          "version": "2.34.0"
+                        }
+                      },
+                      "to FanaPlatformStackfanaserviceSG5094F012:3001": {
+                        "id": "to FanaPlatformStackfanaserviceSG5094F012:3001",
+                        "path": "FanaPlatformStack/fana-service/LB/SecurityGroup/to FanaPlatformStackfanaserviceSG5094F012:3001",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupEgress",
+                          "aws:cdk:cloudformation:props": {
+                            "groupId": {
+                              "Fn::GetAtt": [
+                                "fanaserviceLBSecurityGroup1E8FAB95",
+                                "GroupId"
+                              ]
+                            },
+                            "ipProtocol": "tcp",
+                            "description": "Load balancer to target",
+                            "destinationSecurityGroupId": {
+                              "Fn::GetAtt": [
+                                "fanaserviceSG30294B9D",
+                                "GroupId"
+                              ]
+                            },
+                            "fromPort": 3001,
+                            "toPort": 3001
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupEgress",
+                          "version": "2.34.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+                      "version": "2.34.0"
+                    }
+                  },
+                  "PublicListener": {
+                    "id": "PublicListener",
+                    "path": "FanaPlatformStack/fana-service/LB/PublicListener",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "FanaPlatformStack/fana-service/LB/PublicListener/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::Listener",
+                          "aws:cdk:cloudformation:props": {
+                            "defaultActions": [
+                              {
+                                "type": "forward",
+                                "targetGroupArn": {
+                                  "Ref": "fanaserviceLBPublicListenerECSGroupA4E8767C"
+                                }
+                              }
+                            ],
+                            "loadBalancerArn": {
+                              "Ref": "fanaserviceLBF1CCA530"
+                            },
+                            "port": 80,
+                            "protocol": "HTTP"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListener",
+                          "version": "2.34.0"
+                        }
+                      },
+                      "ECSGroup": {
+                        "id": "ECSGroup",
+                        "path": "FanaPlatformStack/fana-service/LB/PublicListener/ECSGroup",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "FanaPlatformStack/fana-service/LB/PublicListener/ECSGroup/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+                              "aws:cdk:cloudformation:props": {
+                                "port": 80,
+                                "protocol": "HTTP",
+                                "targetGroupAttributes": [
+                                  {
+                                    "key": "stickiness.enabled",
+                                    "value": "false"
+                                  }
+                                ],
+                                "targetType": "ip",
+                                "vpcId": {
+                                  "Fn::ImportValue": "fana-shared-resources:ExportsOutputReffanavpc71F92CF5BBA8AEF7"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnTargetGroup",
+                              "version": "2.34.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationTargetGroup",
+                          "version": "2.34.0"
+                        }
+                      },
+                      "bearerStreamRule": {
+                        "id": "bearerStreamRule",
+                        "path": "FanaPlatformStack/fana-service/LB/PublicListener/bearerStreamRule",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "FanaPlatformStack/fana-service/LB/PublicListener/bearerStreamRule/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+                              "aws:cdk:cloudformation:props": {
+                                "actions": [
+                                  {
+                                    "type": "forward",
+                                    "targetGroupArn": {
+                                      "Ref": "flagbearerTG27037E0D"
+                                    }
+                                  }
+                                ],
+                                "conditions": [
+                                  {
+                                    "field": "path-pattern",
+                                    "pathPatternConfig": {
+                                      "values": [
+                                        "/connect*",
+                                        "/stream*"
+                                      ]
+                                    }
+                                  }
+                                ],
+                                "listenerArn": {
+                                  "Ref": "fanaserviceLBPublicListener9F36CED5"
+                                },
+                                "priority": 11
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListenerRule",
+                              "version": "2.34.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListenerRule",
+                          "version": "2.34.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListener",
+                      "version": "2.34.0"
                     }
                   }
                 },
                 "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_ecs.CfnService",
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationLoadBalancer",
+                  "version": "2.34.0"
+                }
+              },
+              "LoadBalancerDNS": {
+                "id": "LoadBalancerDNS",
+                "path": "FanaPlatformStack/fana-service/LoadBalancerDNS",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.34.0"
+                }
+              },
+              "ServiceURL": {
+                "id": "ServiceURL",
+                "path": "FanaPlatformStack/fana-service/ServiceURL",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.34.0"
+                }
+              },
+              "Service": {
+                "id": "Service",
+                "path": "FanaPlatformStack/fana-service/Service",
+                "children": {
+                  "Service": {
+                    "id": "Service",
+                    "path": "FanaPlatformStack/fana-service/Service/Service",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ECS::Service",
+                      "aws:cdk:cloudformation:props": {
+                        "cluster": {
+                          "Fn::ImportValue": "fana-shared-resources:ExportsOutputReffanaclusterB441A15AC8EDF09F"
+                        },
+                        "deploymentConfiguration": {
+                          "maximumPercent": 200,
+                          "minimumHealthyPercent": 50
+                        },
+                        "desiredCount": 1,
+                        "enableEcsManagedTags": false,
+                        "healthCheckGracePeriodSeconds": 60,
+                        "launchType": "FARGATE",
+                        "loadBalancers": [
+                          {
+                            "targetGroupArn": {
+                              "Ref": "fanaserviceLBPublicListenerECSGroupA4E8767C"
+                            },
+                            "containerName": "fanaManagerContainer",
+                            "containerPort": 3000
+                          },
+                          {
+                            "targetGroupArn": {
+                              "Ref": "flagbearerTG27037E0D"
+                            },
+                            "containerName": "fanaBearerContainer",
+                            "containerPort": 3001
+                          }
+                        ],
+                        "networkConfiguration": {
+                          "awsvpcConfiguration": {
+                            "assignPublicIp": "DISABLED",
+                            "subnets": [
+                              {
+                                "Fn::ImportValue": "fana-shared-resources:ExportsOutputReffanavpcPrivateSubnet1Subnet5472B4A7D62B11CA"
+                              },
+                              {
+                                "Fn::ImportValue": "fana-shared-resources:ExportsOutputReffanavpcPrivateSubnet2Subnet5043D2161B070C6D"
+                              }
+                            ],
+                            "securityGroups": [
+                              {
+                                "Fn::GetAtt": [
+                                  "fanaserviceSG30294B9D",
+                                  "GroupId"
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "taskDefinition": {
+                          "Ref": "fanaServiceTaskDefinition7714E28D"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ecs.CfnService",
+                      "version": "2.34.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ecs.FargateService",
                   "version": "2.34.0"
                 }
               }
             },
             "constructInfo": {
-              "fqn": "aws-cdk-lib.aws_ecs.FargateService",
+              "fqn": "aws-cdk-lib.aws_ecs_patterns.ApplicationLoadBalancedFargateService",
+              "version": "2.34.0"
+            }
+          },
+          "flag-bearer-TG": {
+            "id": "flag-bearer-TG",
+            "path": "FanaPlatformStack/flag-bearer-TG",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "FanaPlatformStack/flag-bearer-TG/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "port": 3001,
+                    "protocol": "HTTP",
+                    "targetGroupAttributes": [
+                      {
+                        "key": "stickiness.enabled",
+                        "value": "false"
+                      }
+                    ],
+                    "targetType": "ip",
+                    "vpcId": {
+                      "Fn::ImportValue": "fana-shared-resources:ExportsOutputReffanavpc71F92CF5BBA8AEF7"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnTargetGroup",
+                  "version": "2.34.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationTargetGroup",
               "version": "2.34.0"
             }
           },

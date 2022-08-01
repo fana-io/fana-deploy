@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1a10ce3ca170373d194748e71c222d19deb2194103fed92cd2d5540bbdb8cef.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e84fe8edaa6aa51826f78f885cb0e1aae7246e84301f6f41d3257d9de827ac20.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -273,6 +273,18 @@
             "data": "ExportsOutputFnGetAttfanaredistestSGfanaredistest8F8EE3FCGroupIdEEC67E99"
           }
         ],
+        "/fana-shared-resources/Exports/Output{\"Ref\":\"fanavpcPublicSubnet1Subnet5496124E\"}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputReffanavpcPublicSubnet1Subnet5496124ECC30E9DE"
+          }
+        ],
+        "/fana-shared-resources/Exports/Output{\"Ref\":\"fanavpcPublicSubnet2Subnet0CE84D65\"}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputReffanavpcPublicSubnet2Subnet0CE84D659B0D89D9"
+          }
+        ],
         "/fana-shared-resources/Exports/Output{\"Ref\":\"fanaclusterB441A15A\"}": [
           {
             "type": "aws:cdk:logicalId",
@@ -322,7 +334,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/15c373d104da2a3bbb2995f0e89ee7bcfb42a1238a9b8093842081ad7440f350.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/264c0d265e4f9732e636f833b020328f4d2a7bbb198d09e2beda3732e8c06593.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -388,7 +400,7 @@
               "/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:1708",
               "ReactiveList.forEachAndForever (/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:5789)",
               "Connections.allowTo (/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:1636)",
-              "FanaStack.createSecurityGroup (/home/ahsu/projects/deploy/lib/fanaStack.js:204:20)",
+              "FanaStack.createSecurityGroup (/home/ahsu/projects/deploy/lib/fanaStack.js:169:20)",
               "new FanaStack (/home/ahsu/projects/deploy/lib/fanaStack.js:27:31)",
               "Object.<anonymous> (/home/ahsu/projects/deploy/bin/fana-platform.js:10:1)",
               "Module._compile (node:internal/modules/cjs/loader:1112:14)",
@@ -411,7 +423,7 @@
               "/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:1708",
               "ReactiveList.forEachAndForever (/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:5789)",
               "Connections.allowTo (/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:1636)",
-              "FanaStack.createSecurityGroup (/home/ahsu/projects/deploy/lib/fanaStack.js:205:20)",
+              "FanaStack.createSecurityGroup (/home/ahsu/projects/deploy/lib/fanaStack.js:174:20)",
               "new FanaStack (/home/ahsu/projects/deploy/lib/fanaStack.js:27:31)",
               "Object.<anonymous> (/home/ahsu/projects/deploy/bin/fana-platform.js:10:1)",
               "Module._compile (node:internal/modules/cjs/loader:1112:14)",
@@ -441,10 +453,82 @@
             "data": "fanaserviceSGfanasharedresourcesfanaredistestSGfanaredistest4DCF18746379to77C35757"
           }
         ],
-        "/FanaPlatformStack/fana-service/Service": [
+        "/FanaPlatformStack/fana-service-SG/from FanaPlatformStackfanaserviceLBSecurityGroup3F47A229:3000": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "fanaserviceService4A41CD76"
+            "data": "fanaserviceSGfromFanaPlatformStackfanaserviceLBSecurityGroup3F47A2293000254FEB32"
+          }
+        ],
+        "/FanaPlatformStack/fana-service-SG/from FanaPlatformStackfanaserviceLBSecurityGroup3F47A229:3001": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "fanaserviceSGfromFanaPlatformStackfanaserviceLBSecurityGroup3F47A229300142961893"
+          }
+        ],
+        "/FanaPlatformStack/fana-service/LB/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "fanaserviceLBF1CCA530"
+          }
+        ],
+        "/FanaPlatformStack/fana-service/LB/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "fanaserviceLBSecurityGroup1E8FAB95"
+          }
+        ],
+        "/FanaPlatformStack/fana-service/LB/SecurityGroup/to FanaPlatformStackfanaserviceSG5094F012:3000": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "fanaserviceLBSecurityGrouptoFanaPlatformStackfanaserviceSG5094F012300076ADD85F"
+          }
+        ],
+        "/FanaPlatformStack/fana-service/LB/SecurityGroup/to FanaPlatformStackfanaserviceSG5094F012:3001": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "fanaserviceLBSecurityGrouptoFanaPlatformStackfanaserviceSG5094F0123001E586DB0F"
+          }
+        ],
+        "/FanaPlatformStack/fana-service/LB/PublicListener/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "fanaserviceLBPublicListener9F36CED5"
+          }
+        ],
+        "/FanaPlatformStack/fana-service/LB/PublicListener/ECSGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "fanaserviceLBPublicListenerECSGroupA4E8767C"
+          }
+        ],
+        "/FanaPlatformStack/fana-service/LB/PublicListener/bearerStreamRule/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "fanaserviceLBPublicListenerbearerStreamRuleFE9C6AAE"
+          }
+        ],
+        "/FanaPlatformStack/fana-service/LoadBalancerDNS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "fanaserviceLoadBalancerDNSD7F12FC1"
+          }
+        ],
+        "/FanaPlatformStack/fana-service/ServiceURL": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "fanaserviceServiceURLF79D253E"
+          }
+        ],
+        "/FanaPlatformStack/fana-service/Service/Service": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "fanaserviceService6A98D7CE"
+          }
+        ],
+        "/FanaPlatformStack/flag-bearer-TG/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "flagbearerTG27037E0D"
           }
         ],
         "/FanaPlatformStack/CDKMetadata/Default": [

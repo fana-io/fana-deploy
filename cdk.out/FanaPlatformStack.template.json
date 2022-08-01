@@ -306,7 +306,229 @@
     "aws:cdk:path": "FanaPlatformStack/fana-service-SG/fanasharedresourcesfanaredistestSGfanaredistest4DCF1874:6379 to"
    }
   },
-  "fanaserviceService4A41CD76": {
+  "fanaserviceSGfromFanaPlatformStackfanaserviceLBSecurityGroup3F47A2293000254FEB32": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "Load balancer to target",
+    "FromPort": 3000,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "fanaserviceSG30294B9D",
+      "GroupId"
+     ]
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "fanaserviceLBSecurityGroup1E8FAB95",
+      "GroupId"
+     ]
+    },
+    "ToPort": 3000
+   },
+   "Metadata": {
+    "aws:cdk:path": "FanaPlatformStack/fana-service-SG/from FanaPlatformStackfanaserviceLBSecurityGroup3F47A229:3000"
+   }
+  },
+  "fanaserviceSGfromFanaPlatformStackfanaserviceLBSecurityGroup3F47A229300142961893": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "Load balancer to target",
+    "FromPort": 3001,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "fanaserviceSG30294B9D",
+      "GroupId"
+     ]
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "fanaserviceLBSecurityGroup1E8FAB95",
+      "GroupId"
+     ]
+    },
+    "ToPort": 3001
+   },
+   "Metadata": {
+    "aws:cdk:path": "FanaPlatformStack/fana-service-SG/from FanaPlatformStackfanaserviceLBSecurityGroup3F47A229:3001"
+   }
+  },
+  "fanaserviceLBF1CCA530": {
+   "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+   "Properties": {
+    "LoadBalancerAttributes": [
+     {
+      "Key": "deletion_protection.enabled",
+      "Value": "false"
+     }
+    ],
+    "Name": "fana-LB",
+    "Scheme": "internet-facing",
+    "SecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "fanaserviceLBSecurityGroup1E8FAB95",
+       "GroupId"
+      ]
+     }
+    ],
+    "Subnets": [
+     {
+      "Fn::ImportValue": "fana-shared-resources:ExportsOutputReffanavpcPublicSubnet1Subnet5496124ECC30E9DE"
+     },
+     {
+      "Fn::ImportValue": "fana-shared-resources:ExportsOutputReffanavpcPublicSubnet2Subnet0CE84D659B0D89D9"
+     }
+    ],
+    "Type": "application"
+   },
+   "Metadata": {
+    "aws:cdk:path": "FanaPlatformStack/fana-service/LB/Resource"
+   }
+  },
+  "fanaserviceLBSecurityGroup1E8FAB95": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Automatically created Security Group for ELB FanaPlatformStackfanaserviceLBAE36CF36",
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow from anyone on port 80",
+      "FromPort": 80,
+      "IpProtocol": "tcp",
+      "ToPort": 80
+     }
+    ],
+    "VpcId": {
+     "Fn::ImportValue": "fana-shared-resources:ExportsOutputReffanavpc71F92CF5BBA8AEF7"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FanaPlatformStack/fana-service/LB/SecurityGroup/Resource"
+   }
+  },
+  "fanaserviceLBSecurityGrouptoFanaPlatformStackfanaserviceSG5094F012300076ADD85F": {
+   "Type": "AWS::EC2::SecurityGroupEgress",
+   "Properties": {
+    "GroupId": {
+     "Fn::GetAtt": [
+      "fanaserviceLBSecurityGroup1E8FAB95",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "Description": "Load balancer to target",
+    "DestinationSecurityGroupId": {
+     "Fn::GetAtt": [
+      "fanaserviceSG30294B9D",
+      "GroupId"
+     ]
+    },
+    "FromPort": 3000,
+    "ToPort": 3000
+   },
+   "Metadata": {
+    "aws:cdk:path": "FanaPlatformStack/fana-service/LB/SecurityGroup/to FanaPlatformStackfanaserviceSG5094F012:3000"
+   }
+  },
+  "fanaserviceLBSecurityGrouptoFanaPlatformStackfanaserviceSG5094F0123001E586DB0F": {
+   "Type": "AWS::EC2::SecurityGroupEgress",
+   "Properties": {
+    "GroupId": {
+     "Fn::GetAtt": [
+      "fanaserviceLBSecurityGroup1E8FAB95",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "Description": "Load balancer to target",
+    "DestinationSecurityGroupId": {
+     "Fn::GetAtt": [
+      "fanaserviceSG30294B9D",
+      "GroupId"
+     ]
+    },
+    "FromPort": 3001,
+    "ToPort": 3001
+   },
+   "Metadata": {
+    "aws:cdk:path": "FanaPlatformStack/fana-service/LB/SecurityGroup/to FanaPlatformStackfanaserviceSG5094F012:3001"
+   }
+  },
+  "fanaserviceLBPublicListener9F36CED5": {
+   "Type": "AWS::ElasticLoadBalancingV2::Listener",
+   "Properties": {
+    "DefaultActions": [
+     {
+      "TargetGroupArn": {
+       "Ref": "fanaserviceLBPublicListenerECSGroupA4E8767C"
+      },
+      "Type": "forward"
+     }
+    ],
+    "LoadBalancerArn": {
+     "Ref": "fanaserviceLBF1CCA530"
+    },
+    "Port": 80,
+    "Protocol": "HTTP"
+   },
+   "Metadata": {
+    "aws:cdk:path": "FanaPlatformStack/fana-service/LB/PublicListener/Resource"
+   }
+  },
+  "fanaserviceLBPublicListenerECSGroupA4E8767C": {
+   "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+   "Properties": {
+    "Port": 80,
+    "Protocol": "HTTP",
+    "TargetGroupAttributes": [
+     {
+      "Key": "stickiness.enabled",
+      "Value": "false"
+     }
+    ],
+    "TargetType": "ip",
+    "VpcId": {
+     "Fn::ImportValue": "fana-shared-resources:ExportsOutputReffanavpc71F92CF5BBA8AEF7"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FanaPlatformStack/fana-service/LB/PublicListener/ECSGroup/Resource"
+   }
+  },
+  "fanaserviceLBPublicListenerbearerStreamRuleFE9C6AAE": {
+   "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+   "Properties": {
+    "Actions": [
+     {
+      "TargetGroupArn": {
+       "Ref": "flagbearerTG27037E0D"
+      },
+      "Type": "forward"
+     }
+    ],
+    "Conditions": [
+     {
+      "Field": "path-pattern",
+      "PathPatternConfig": {
+       "Values": [
+        "/connect*",
+        "/stream*"
+       ]
+      }
+     }
+    ],
+    "ListenerArn": {
+     "Ref": "fanaserviceLBPublicListener9F36CED5"
+    },
+    "Priority": 11
+   },
+   "Metadata": {
+    "aws:cdk:path": "FanaPlatformStack/fana-service/LB/PublicListener/bearerStreamRule/Resource"
+   }
+  },
+  "fanaserviceService6A98D7CE": {
    "Type": "AWS::ECS::Service",
    "Properties": {
     "Cluster": {
@@ -316,8 +538,26 @@
      "MaximumPercent": 200,
      "MinimumHealthyPercent": 50
     },
+    "DesiredCount": 1,
     "EnableECSManagedTags": false,
+    "HealthCheckGracePeriodSeconds": 60,
     "LaunchType": "FARGATE",
+    "LoadBalancers": [
+     {
+      "ContainerName": "fanaManagerContainer",
+      "ContainerPort": 3000,
+      "TargetGroupArn": {
+       "Ref": "fanaserviceLBPublicListenerECSGroupA4E8767C"
+      }
+     },
+     {
+      "ContainerName": "fanaBearerContainer",
+      "ContainerPort": 3001,
+      "TargetGroupArn": {
+       "Ref": "flagbearerTG27037E0D"
+      }
+     }
+    ],
     "NetworkConfiguration": {
      "AwsvpcConfiguration": {
       "AssignPublicIp": "DISABLED",
@@ -343,19 +583,70 @@
      "Ref": "fanaServiceTaskDefinition7714E28D"
     }
    },
+   "DependsOn": [
+    "fanaserviceLBPublicListenerbearerStreamRuleFE9C6AAE",
+    "fanaserviceLBPublicListenerECSGroupA4E8767C",
+    "fanaserviceLBPublicListener9F36CED5"
+   ],
    "Metadata": {
-    "aws:cdk:path": "FanaPlatformStack/fana-service/Service"
+    "aws:cdk:path": "FanaPlatformStack/fana-service/Service/Service"
+   }
+  },
+  "flagbearerTG27037E0D": {
+   "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+   "Properties": {
+    "Port": 3001,
+    "Protocol": "HTTP",
+    "TargetGroupAttributes": [
+     {
+      "Key": "stickiness.enabled",
+      "Value": "false"
+     }
+    ],
+    "TargetType": "ip",
+    "VpcId": {
+     "Fn::ImportValue": "fana-shared-resources:ExportsOutputReffanavpc71F92CF5BBA8AEF7"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FanaPlatformStack/flag-bearer-TG/Resource"
    }
   },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/32QTQvCMAyGf4v3rupU8K4oggfZvEvtspF9NNJ2kzH63+0+FPHgKW+eEPKQkK/WfDETTxPIpAhKvPMutkIWzKNbB9Lw7iB0JixchSn2kKJCi6TYLlW/hJQVqEB/sWk3Bt2ghH5pio6hqHgXUTnQoV6oRNn27ZgcKynzAmfKjprqRz95Z8dAht4VZK3Rtp/5f3BSmQZjnBtugqFaj1bePRmMHVOUAM/NvFlu+cb/JjeIga6VxQp4NNYX97rw8zcBAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/31S22rDMAz9lr273tZtsNfdGRQ20r4X1VGDGtcOtpxRgv99zqXFdGVPko4uPkfyXN7dy5sr+PEzVdYzTRvZLRlULRK07lB52b2Dq4BxBb5+xS0ZYrJGvGzNOWINAxl0GTb1LtG1pLBvmtwoCPayK6we0MF+W03q0IejF4W2VSKwsNWHs6HpM0c/ClTzxBVVcMSHU/5/4NNUDr3/g78NcD/TrxtgRme8fGqaxAJ6HQsL5TNoMArLM0mowTMpnSo2QwWZqk3MLne7UUMW53XkGc1Uc/Sz/Cq9jHxSlocXphRhXG0ex9gjX4GbwMPa0dvgxsOk85XD0aIwtkS589ft7aN8SN9j54lmLhimPcpitL/07uF+OgIAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "FanaPlatformStack/CDKMetadata/Default"
    },
    "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Outputs": {
+  "fanaserviceLoadBalancerDNSD7F12FC1": {
+   "Value": {
+    "Fn::GetAtt": [
+     "fanaserviceLBF1CCA530",
+     "DNSName"
+    ]
+   }
+  },
+  "fanaserviceServiceURLF79D253E": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "http://",
+      {
+       "Fn::GetAtt": [
+        "fanaserviceLBF1CCA530",
+        "DNSName"
+       ]
+      }
+     ]
+    ]
+   }
   }
  },
  "Conditions": {
