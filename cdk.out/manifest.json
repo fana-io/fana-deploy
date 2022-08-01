@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/2afb7b396f79463d6d84a1c2fdd012810e0f06bc29ad79258a7b81a6e4948bf8.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/9a2682f06e57ff65a9743e575b1cdb1e57e33ca28ab371e5e40d3ff7c77115a0.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -213,16 +213,10 @@
             "data": "fanaDBSecurityGroupC50F2AF4"
           }
         ],
-        "/fana-shared-resources/fanaDB/Secret/Resource": [
+        "/fana-shared-resources/fanaDB/SecurityGroup/from 0.0.0.0_0:{IndirectPort}": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "fanasharedresourcesfanaDBSecret465B7F2C3fdaad7efa858a3daf9490cf0a702aeb"
-          }
-        ],
-        "/fana-shared-resources/fanaDB/Secret/Attachment/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "fanaDBSecretAttachment91372E9C"
+            "data": "fanaDBSecurityGroupfrom00000IndirectPort84A48669"
           }
         ],
         "/fana-shared-resources/fanaDB/Resource": [
