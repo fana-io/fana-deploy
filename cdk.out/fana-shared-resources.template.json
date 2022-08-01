@@ -519,26 +519,6 @@
     "aws:cdk:path": "fana-shared-resources/fana-redis-test/fana-redis-test-cluster"
    }
   },
-  "SGfanasharedresourcesBC3AADF0": {
-   "Type": "AWS::EC2::SecurityGroup",
-   "Properties": {
-    "GroupDescription": "Allows TCP connections to port 5432",
-    "GroupName": "fana-postgres-SG",
-    "SecurityGroupEgress": [
-     {
-      "CidrIp": "0.0.0.0/0",
-      "Description": "Allow all outbound traffic by default",
-      "IpProtocol": "-1"
-     }
-    ],
-    "VpcId": {
-     "Ref": "fanavpc71F92CF5"
-    }
-   },
-   "Metadata": {
-    "aws:cdk:path": "fana-shared-resources/SG-fana-shared-resources/Resource"
-   }
-  },
   "fanaDBSubnetGroupBF989B71": {
    "Type": "AWS::RDS::DBSubnetGroup",
    "Properties": {

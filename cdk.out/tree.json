@@ -9,7 +9,7 @@
         "path": "Tree",
         "constructInfo": {
           "fqn": "constructs.Construct",
-          "version": "10.1.60"
+          "version": "10.1.62"
         }
       },
       "fana-shared-resources": {
@@ -774,42 +774,7 @@
             },
             "constructInfo": {
               "fqn": "constructs.Construct",
-              "version": "10.1.60"
-            }
-          },
-          "SG-fana-shared-resources": {
-            "id": "SG-fana-shared-resources",
-            "path": "fana-shared-resources/SG-fana-shared-resources",
-            "children": {
-              "Resource": {
-                "id": "Resource",
-                "path": "fana-shared-resources/SG-fana-shared-resources/Resource",
-                "attributes": {
-                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
-                  "aws:cdk:cloudformation:props": {
-                    "groupDescription": "Allows TCP connections to port 5432",
-                    "groupName": "fana-postgres-SG",
-                    "securityGroupEgress": [
-                      {
-                        "cidrIp": "0.0.0.0/0",
-                        "description": "Allow all outbound traffic by default",
-                        "ipProtocol": "-1"
-                      }
-                    ],
-                    "vpcId": {
-                      "Ref": "fanavpc71F92CF5"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
-                  "version": "2.34.0"
-                }
-              }
-            },
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
-              "version": "2.34.0"
+              "version": "10.1.62"
             }
           },
           "fanaDB": {
@@ -944,7 +909,7 @@
             },
             "constructInfo": {
               "fqn": "constructs.Construct",
-              "version": "10.1.60"
+              "version": "10.1.62"
             }
           },
           "Exports": {
@@ -1034,7 +999,7 @@
             },
             "constructInfo": {
               "fqn": "constructs.Construct",
-              "version": "10.1.60"
+              "version": "10.1.62"
             }
           }
         },
@@ -1565,7 +1530,7 @@
             },
             "constructInfo": {
               "fqn": "constructs.Construct",
-              "version": "10.1.60"
+              "version": "10.1.62"
             }
           }
         },

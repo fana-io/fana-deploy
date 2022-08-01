@@ -201,12 +201,6 @@
             "data": "fanaredistestfanaredistestclusterD26287DD"
           }
         ],
-        "/fana-shared-resources/SG-fana-shared-resources/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "SGfanasharedresourcesBC3AADF0"
-          }
-        ],
         "/fana-shared-resources/fanaDB/SubnetGroup/Default": [
           {
             "type": "aws:cdk:logicalId",
@@ -394,7 +388,8 @@
               "/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:1708",
               "ReactiveList.forEachAndForever (/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:5789)",
               "Connections.allowTo (/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:1636)",
-              "new FanaStack (/home/ahsu/projects/deploy/lib/fanaStack.js:73:31)",
+              "FanaStack.createSecurityGroup (/home/ahsu/projects/deploy/lib/fanaStack.js:204:20)",
+              "new FanaStack (/home/ahsu/projects/deploy/lib/fanaStack.js:27:31)",
               "Object.<anonymous> (/home/ahsu/projects/deploy/bin/fana-platform.js:10:1)",
               "Module._compile (node:internal/modules/cjs/loader:1112:14)",
               "Module._extensions..js (node:internal/modules/cjs/loader:1166:10)",
@@ -416,7 +411,8 @@
               "/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:1708",
               "ReactiveList.forEachAndForever (/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:5789)",
               "Connections.allowTo (/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:1636)",
-              "new FanaStack (/home/ahsu/projects/deploy/lib/fanaStack.js:74:31)",
+              "FanaStack.createSecurityGroup (/home/ahsu/projects/deploy/lib/fanaStack.js:205:20)",
+              "new FanaStack (/home/ahsu/projects/deploy/lib/fanaStack.js:27:31)",
               "Object.<anonymous> (/home/ahsu/projects/deploy/bin/fana-platform.js:10:1)",
               "Module._compile (node:internal/modules/cjs/loader:1112:14)",
               "Module._extensions..js (node:internal/modules/cjs/loader:1166:10)",
