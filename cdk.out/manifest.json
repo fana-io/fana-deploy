@@ -201,6 +201,12 @@
             "data": "fanaredistestfanaredistestclusterD26287DD"
           }
         ],
+        "/fana-shared-resources/SG-fana-shared-resources/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SGfanasharedresourcesBC3AADF0"
+          }
+        ],
         "/fana-shared-resources/fanaDB/SubnetGroup/Default": [
           {
             "type": "aws:cdk:logicalId",
