@@ -245,6 +245,67 @@
     "aws:cdk:path": "FanaPlatformStack/fanaServiceTaskDefinition/fanaBearerContainer/LogGroup/Resource"
    }
   },
+  "fanaserviceSG30294B9D": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Allow connections to Postgres and Redis DBs.",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Fn::ImportValue": "fana-shared-resources:ExportsOutputReffanavpc71F92CF5BBA8AEF7"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FanaPlatformStack/fana-service-SG/Resource"
+   }
+  },
+  "fanaserviceSGfanasharedresourcesfanaDBSecurityGroup37B2B9925432to3820BD3A": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "To RDS instance",
+    "FromPort": 5432,
+    "GroupId": {
+     "Fn::ImportValue": "fana-shared-resources:ExportsOutputFnGetAttfanaDBSecurityGroupC50F2AF4GroupId38F92506"
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "fanaserviceSG30294B9D",
+      "GroupId"
+     ]
+    },
+    "ToPort": 5432
+   },
+   "Metadata": {
+    "aws:cdk:path": "FanaPlatformStack/fana-service-SG/fanasharedresourcesfanaDBSecurityGroup37B2B992:5432 to"
+   }
+  },
+  "fanaserviceSGfanasharedresourcesfanaredistestSGfanaredistest4DCF18746379to77C35757": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "To Redis instance",
+    "FromPort": 6379,
+    "GroupId": {
+     "Fn::ImportValue": "fana-shared-resources:ExportsOutputFnGetAttfanaredistestSGfanaredistest8F8EE3FCGroupIdEEC67E99"
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "fanaserviceSG30294B9D",
+      "GroupId"
+     ]
+    },
+    "ToPort": 6379
+   },
+   "Metadata": {
+    "aws:cdk:path": "FanaPlatformStack/fana-service-SG/fanasharedresourcesfanaredistestSGfanaredistest4DCF1874:6379 to"
+   }
+  },
   "fanaserviceService4A41CD76": {
    "Type": "AWS::ECS::Service",
    "Properties": {
@@ -263,7 +324,7 @@
       "SecurityGroups": [
        {
         "Fn::GetAtt": [
-         "fanaserviceSecurityGroup4DF913D9",
+         "fanaserviceSG30294B9D",
          "GroupId"
         ]
        }
@@ -286,29 +347,10 @@
     "aws:cdk:path": "FanaPlatformStack/fana-service/Service"
    }
   },
-  "fanaserviceSecurityGroup4DF913D9": {
-   "Type": "AWS::EC2::SecurityGroup",
-   "Properties": {
-    "GroupDescription": "FanaPlatformStack/fana-service/SecurityGroup",
-    "SecurityGroupEgress": [
-     {
-      "CidrIp": "0.0.0.0/0",
-      "Description": "Allow all outbound traffic by default",
-      "IpProtocol": "-1"
-     }
-    ],
-    "VpcId": {
-     "Fn::ImportValue": "fana-shared-resources:ExportsOutputReffanavpc71F92CF5BBA8AEF7"
-    }
-   },
-   "Metadata": {
-    "aws:cdk:path": "FanaPlatformStack/fana-service/SecurityGroup/Resource"
-   }
-  },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/12QTw+CMAzFP4v3MRU18a7RiwcD3s0chVTGaraBIWTf3fFHo576+ntp+9KYr9Z8MRNPG8msjBTeeJc6IUsW0LUDaXl3EKYQDi7ClnvIUaND0myX639C2gnUYL7YNJuCaVBCPzRJz1BUvEtIDXSoZ1Io274dlWeKihDgRMXRUP3onbf2DGQcsoKsDbr24/8A74fdYKk24/WQMRuSeaYpA36382a55Zvwg7tFjEytHVbAk7G+AE21wpMfAQAA"
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/32QTQvCMAyGf4v3rupU8K4oggfZvEvtspF9NNJ2kzH63+0+FPHgKW+eEPKQkK/WfDETTxPIpAhKvPMutkIWzKNbB9Lw7iB0JixchSn2kKJCi6TYLlW/hJQVqEB/sWk3Bt2ghH5pio6hqHgXUTnQoV6oRNn27ZgcKynzAmfKjprqRz95Z8dAht4VZK3Rtp/5f3BSmQZjnBtugqFaj1bePRmMHVOUAM/NvFlu+cb/JjeIga6VxQp4NNYX97rw8zcBAAA="
    },
    "Metadata": {
     "aws:cdk:path": "FanaPlatformStack/CDKMetadata/Default"

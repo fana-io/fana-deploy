@@ -6,6 +6,7 @@ const SharedResources = require('../lib/sharedResources');
 
 const app = new cdk.App();
 const shared = new SharedResources(app, 'fana-shared-resources');
+
 new FanaStack(app, 'FanaPlatformStack', {
   cluster: shared.cluster,
   redis: shared.redis,

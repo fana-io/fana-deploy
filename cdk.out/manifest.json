@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/9a2682f06e57ff65a9743e575b1cdb1e57e33ca28ab371e5e40d3ff7c77115a0.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1a10ce3ca170373d194748e71c222d19deb2194103fed92cd2d5540bbdb8cef.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -213,12 +213,6 @@
             "data": "fanaDBSecurityGroupC50F2AF4"
           }
         ],
-        "/fana-shared-resources/fanaDB/SecurityGroup/from 0.0.0.0_0:{IndirectPort}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "fanaDBSecurityGroupfrom00000IndirectPort84A48669"
-          }
-        ],
         "/fana-shared-resources/fanaDB/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -261,6 +255,24 @@
             "data": "ExportsOutputFnGetAttfanaDBA214E5A4EndpointPortA2F54514"
           }
         ],
+        "/fana-shared-resources/Exports/Output{\"Ref\":\"fanavpc71F92CF5\"}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputReffanavpc71F92CF5BBA8AEF7"
+          }
+        ],
+        "/fana-shared-resources/Exports/Output{\"Fn::GetAtt\":[\"fanaDBSecurityGroupC50F2AF4\",\"GroupId\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttfanaDBSecurityGroupC50F2AF4GroupId38F92506"
+          }
+        ],
+        "/fana-shared-resources/Exports/Output{\"Fn::GetAtt\":[\"fanaredistestSGfanaredistest8F8EE3FC\",\"GroupId\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttfanaredistestSGfanaredistest8F8EE3FCGroupIdEEC67E99"
+          }
+        ],
         "/fana-shared-resources/Exports/Output{\"Ref\":\"fanaclusterB441A15A\"}": [
           {
             "type": "aws:cdk:logicalId",
@@ -277,12 +289,6 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "ExportsOutputReffanavpcPrivateSubnet2Subnet5043D2161B070C6D"
-          }
-        ],
-        "/fana-shared-resources/Exports/Output{\"Ref\":\"fanavpc71F92CF5\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputReffanavpc71F92CF5BBA8AEF7"
           }
         ],
         "/fana-shared-resources/BootstrapVersion": [
@@ -316,7 +322,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/4dc041bb7cdf50ad39bdf00ea91ea827862e321b9e7590802e35e6ab0049c4d6.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/15c373d104da2a3bbb2995f0e89ee7bcfb42a1238a9b8093842081ad7440f350.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -369,16 +375,74 @@
             "data": "fanaServiceTaskDefinitionfanaBearerContainerLogGroupE940E436"
           }
         ],
+        "/FanaPlatformStack/fana-service-SG": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "Ignoring Egress rule since 'allowAllOutbound' is set to true; To add customized rules, set allowAllOutbound=false on the SecurityGroup",
+            "trace": [
+              "Annotations.addMessage (/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/core/lib/annotations.js:1:1213)",
+              "Annotations.addWarning (/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/core/lib/annotations.js:1:600)",
+              "SecurityGroup.addEgressRule (/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/security-group.js:1:6934)",
+              "/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:1747",
+              "ReactiveList.forEachAndForever (/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:5789)",
+              "/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:1708",
+              "ReactiveList.forEachAndForever (/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:5789)",
+              "Connections.allowTo (/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:1636)",
+              "new FanaStack (/home/ahsu/projects/deploy/lib/fanaStack.js:73:31)",
+              "Object.<anonymous> (/home/ahsu/projects/deploy/bin/fana-platform.js:10:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1112:14)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1166:10)",
+              "Module.load (node:internal/modules/cjs/loader:988:32)",
+              "Module._load (node:internal/modules/cjs/loader:834:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          },
+          {
+            "type": "aws:cdk:warning",
+            "data": "Ignoring Egress rule since 'allowAllOutbound' is set to true; To add customized rules, set allowAllOutbound=false on the SecurityGroup",
+            "trace": [
+              "Annotations.addMessage (/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/core/lib/annotations.js:1:1213)",
+              "Annotations.addWarning (/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/core/lib/annotations.js:1:600)",
+              "SecurityGroup.addEgressRule (/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/security-group.js:1:6934)",
+              "/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:1747",
+              "ReactiveList.forEachAndForever (/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:5789)",
+              "/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:1708",
+              "ReactiveList.forEachAndForever (/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:5789)",
+              "Connections.allowTo (/home/ahsu/projects/deploy/node_modules/aws-cdk-lib/aws-ec2/lib/connections.js:1:1636)",
+              "new FanaStack (/home/ahsu/projects/deploy/lib/fanaStack.js:74:31)",
+              "Object.<anonymous> (/home/ahsu/projects/deploy/bin/fana-platform.js:10:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1112:14)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1166:10)",
+              "Module.load (node:internal/modules/cjs/loader:988:32)",
+              "Module._load (node:internal/modules/cjs/loader:834:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/FanaPlatformStack/fana-service-SG/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "fanaserviceSG30294B9D"
+          }
+        ],
+        "/FanaPlatformStack/fana-service-SG/fanasharedresourcesfanaDBSecurityGroup37B2B992:5432 to": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "fanaserviceSGfanasharedresourcesfanaDBSecurityGroup37B2B9925432to3820BD3A"
+          }
+        ],
+        "/FanaPlatformStack/fana-service-SG/fanasharedresourcesfanaredistestSGfanaredistest4DCF1874:6379 to": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "fanaserviceSGfanasharedresourcesfanaredistestSGfanaredistest4DCF18746379to77C35757"
+          }
+        ],
         "/FanaPlatformStack/fana-service/Service": [
           {
             "type": "aws:cdk:logicalId",
             "data": "fanaserviceService4A41CD76"
-          }
-        ],
-        "/FanaPlatformStack/fana-service/SecurityGroup/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "fanaserviceSecurityGroup4DF913D9"
           }
         ],
         "/FanaPlatformStack/CDKMetadata/Default": [

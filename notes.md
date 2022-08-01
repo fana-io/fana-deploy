@@ -68,3 +68,10 @@ Create a secret for the db credentials (username and password)
 
 https://bobbyhadz.com/blog/get-secrets-manager-values-aws-cdk
 https://blog.phillipninan.com/provision-an-rds-instance-using-the-aws-cdk-and-secrets
+
+
+https://stackoverflow.com/questions/71206122/adding-rule-to-the-security-group-which-is-created-automatically
+
+This turned out to be easier than I thought- you can just flip the connection so that rather than trying to modify the rds to accept a security group of the ecs, you use the allowTo to establish a connection to the rds instance.
+
+    ecsSG.connections.allowTo(props.rds, ec2.Port.tcp(5432), 'RDS Instance');

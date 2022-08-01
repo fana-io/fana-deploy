@@ -726,15 +726,6 @@
                             "ipProtocol": "-1"
                           }
                         ],
-                        "securityGroupIngress": [
-                          {
-                            "cidrIp": "0.0.0.0/0",
-                            "ipProtocol": "tcp",
-                            "fromPort": 6379,
-                            "toPort": 6379,
-                            "description": "Allow inbound from any Ip addresses on default port."
-                          }
-                        ],
                         "vpcId": {
                           "Ref": "fanavpc71F92CF5"
                         }
@@ -849,40 +840,6 @@
                       "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
                       "version": "2.34.0"
                     }
-                  },
-                  "from 0.0.0.0_0:{IndirectPort}": {
-                    "id": "from 0.0.0.0_0:{IndirectPort}",
-                    "path": "fana-shared-resources/fanaDB/SecurityGroup/from 0.0.0.0_0:{IndirectPort}",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
-                      "aws:cdk:cloudformation:props": {
-                        "ipProtocol": "tcp",
-                        "cidrIp": "0.0.0.0/0",
-                        "description": "Allow inbound connection on default port from all",
-                        "fromPort": {
-                          "Fn::GetAtt": [
-                            "fanaDBA214E5A4",
-                            "Endpoint.Port"
-                          ]
-                        },
-                        "groupId": {
-                          "Fn::GetAtt": [
-                            "fanaDBSecurityGroupC50F2AF4",
-                            "GroupId"
-                          ]
-                        },
-                        "toPort": {
-                          "Fn::GetAtt": [
-                            "fanaDBA214E5A4",
-                            "Endpoint.Port"
-                          ]
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
-                      "version": "2.34.0"
-                    }
                   }
                 },
                 "constructInfo": {
@@ -991,6 +948,30 @@
                   "version": "2.34.0"
                 }
               },
+              "Output{\"Ref\":\"fanavpc71F92CF5\"}": {
+                "id": "Output{\"Ref\":\"fanavpc71F92CF5\"}",
+                "path": "fana-shared-resources/Exports/Output{\"Ref\":\"fanavpc71F92CF5\"}",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.34.0"
+                }
+              },
+              "Output{\"Fn::GetAtt\":[\"fanaDBSecurityGroupC50F2AF4\",\"GroupId\"]}": {
+                "id": "Output{\"Fn::GetAtt\":[\"fanaDBSecurityGroupC50F2AF4\",\"GroupId\"]}",
+                "path": "fana-shared-resources/Exports/Output{\"Fn::GetAtt\":[\"fanaDBSecurityGroupC50F2AF4\",\"GroupId\"]}",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.34.0"
+                }
+              },
+              "Output{\"Fn::GetAtt\":[\"fanaredistestSGfanaredistest8F8EE3FC\",\"GroupId\"]}": {
+                "id": "Output{\"Fn::GetAtt\":[\"fanaredistestSGfanaredistest8F8EE3FC\",\"GroupId\"]}",
+                "path": "fana-shared-resources/Exports/Output{\"Fn::GetAtt\":[\"fanaredistestSGfanaredistest8F8EE3FC\",\"GroupId\"]}",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.34.0"
+                }
+              },
               "Output{\"Ref\":\"fanaclusterB441A15A\"}": {
                 "id": "Output{\"Ref\":\"fanaclusterB441A15A\"}",
                 "path": "fana-shared-resources/Exports/Output{\"Ref\":\"fanaclusterB441A15A\"}",
@@ -1010,14 +991,6 @@
               "Output{\"Ref\":\"fanavpcPrivateSubnet2Subnet5043D216\"}": {
                 "id": "Output{\"Ref\":\"fanavpcPrivateSubnet2Subnet5043D216\"}",
                 "path": "fana-shared-resources/Exports/Output{\"Ref\":\"fanavpcPrivateSubnet2Subnet5043D216\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.34.0"
-                }
-              },
-              "Output{\"Ref\":\"fanavpc71F92CF5\"}": {
-                "id": "Output{\"Ref\":\"fanavpc71F92CF5\"}",
-                "path": "fana-shared-resources/Exports/Output{\"Ref\":\"fanavpc71F92CF5\"}",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnOutput",
                   "version": "2.34.0"
@@ -1392,6 +1365,92 @@
               "version": "2.34.0"
             }
           },
+          "fana-service-SG": {
+            "id": "fana-service-SG",
+            "path": "FanaPlatformStack/fana-service-SG",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "FanaPlatformStack/fana-service-SG/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "Allow connections to Postgres and Redis DBs.",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "vpcId": {
+                      "Fn::ImportValue": "fana-shared-resources:ExportsOutputReffanavpc71F92CF5BBA8AEF7"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.34.0"
+                }
+              },
+              "fanasharedresourcesfanaDBSecurityGroup37B2B992:5432 to": {
+                "id": "fanasharedresourcesfanaDBSecurityGroup37B2B992:5432 to",
+                "path": "FanaPlatformStack/fana-service-SG/fanasharedresourcesfanaDBSecurityGroup37B2B992:5432 to",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "ipProtocol": "tcp",
+                    "description": "To RDS instance",
+                    "fromPort": 5432,
+                    "groupId": {
+                      "Fn::ImportValue": "fana-shared-resources:ExportsOutputFnGetAttfanaDBSecurityGroupC50F2AF4GroupId38F92506"
+                    },
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "fanaserviceSG30294B9D",
+                        "GroupId"
+                      ]
+                    },
+                    "toPort": 5432
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.34.0"
+                }
+              },
+              "fanasharedresourcesfanaredistestSGfanaredistest4DCF1874:6379 to": {
+                "id": "fanasharedresourcesfanaredistestSGfanaredistest4DCF1874:6379 to",
+                "path": "FanaPlatformStack/fana-service-SG/fanasharedresourcesfanaredistestSGfanaredistest4DCF1874:6379 to",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "ipProtocol": "tcp",
+                    "description": "To Redis instance",
+                    "fromPort": 6379,
+                    "groupId": {
+                      "Fn::ImportValue": "fana-shared-resources:ExportsOutputFnGetAttfanaredistestSGfanaredistest8F8EE3FCGroupIdEEC67E99"
+                    },
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "fanaserviceSG30294B9D",
+                        "GroupId"
+                      ]
+                    },
+                    "toPort": 6379
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.34.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.34.0"
+            }
+          },
           "fana-service": {
             "id": "fana-service",
             "path": "FanaPlatformStack/fana-service",
@@ -1425,7 +1484,7 @@
                         "securityGroups": [
                           {
                             "Fn::GetAtt": [
-                              "fanaserviceSecurityGroup4DF913D9",
+                              "fanaserviceSG30294B9D",
                               "GroupId"
                             ]
                           }
@@ -1439,40 +1498,6 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_ecs.CfnService",
-                  "version": "2.34.0"
-                }
-              },
-              "SecurityGroup": {
-                "id": "SecurityGroup",
-                "path": "FanaPlatformStack/fana-service/SecurityGroup",
-                "children": {
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "FanaPlatformStack/fana-service/SecurityGroup/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
-                      "aws:cdk:cloudformation:props": {
-                        "groupDescription": "FanaPlatformStack/fana-service/SecurityGroup",
-                        "securityGroupEgress": [
-                          {
-                            "cidrIp": "0.0.0.0/0",
-                            "description": "Allow all outbound traffic by default",
-                            "ipProtocol": "-1"
-                          }
-                        ],
-                        "vpcId": {
-                          "Fn::ImportValue": "fana-shared-resources:ExportsOutputReffanavpc71F92CF5BBA8AEF7"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
-                      "version": "2.34.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
                   "version": "2.34.0"
                 }
               }

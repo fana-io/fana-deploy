@@ -487,15 +487,6 @@
       "IpProtocol": "-1"
      }
     ],
-    "SecurityGroupIngress": [
-     {
-      "CidrIp": "0.0.0.0/0",
-      "Description": "Allow inbound from any Ip addresses on default port.",
-      "FromPort": 6379,
-      "IpProtocol": "tcp",
-      "ToPort": 6379
-     }
-    ],
     "VpcId": {
      "Ref": "fanavpc71F92CF5"
     }
@@ -564,35 +555,6 @@
     "aws:cdk:path": "fana-shared-resources/fanaDB/SecurityGroup/Resource"
    }
   },
-  "fanaDBSecurityGroupfrom00000IndirectPort84A48669": {
-   "Type": "AWS::EC2::SecurityGroupIngress",
-   "Properties": {
-    "IpProtocol": "tcp",
-    "CidrIp": "0.0.0.0/0",
-    "Description": "Allow inbound connection on default port from all",
-    "FromPort": {
-     "Fn::GetAtt": [
-      "fanaDBA214E5A4",
-      "Endpoint.Port"
-     ]
-    },
-    "GroupId": {
-     "Fn::GetAtt": [
-      "fanaDBSecurityGroupC50F2AF4",
-      "GroupId"
-     ]
-    },
-    "ToPort": {
-     "Fn::GetAtt": [
-      "fanaDBA214E5A4",
-      "Endpoint.Port"
-     ]
-    }
-   },
-   "Metadata": {
-    "aws:cdk:path": "fana-shared-resources/fanaDB/SecurityGroup/from 0.0.0.0_0:{IndirectPort}"
-   }
-  },
   "fanaDBA214E5A4": {
    "Type": "AWS::RDS::DBInstance",
    "Properties": {
@@ -626,7 +588,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/31RwU7DMAz9Fu5pgAES15GhqRdUtWhX5KYeZOuSKXY2TVX/nWRbWwQSJ788vzy/ODP58CjvbuBImW62WWtq2VUMeisi9dGhnslutddCre2qUKIIdWt0FWqLnLgJlS4wvkPd4sRP3JzIaQNsnB3FCbzmRSpvwEtgPMJJFN4cIpyMc8voIx4ElyTX05xj1q8dWhYV6uANn5behf05w79Ebj89EvUCNclOtYHimKS6wthogdjo6I9RMLxpdFOpMYp9E10WwFADYW6JwWoUv64sXv4Qg7TvRYnkgtfnvfzEytnGpM31wroG5YZuD/fP8il+24aMyXywbHYoy0v9BkC/F4PSAQAA"
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/2VRQU7DMBB8C3fXQAGJa0lRlQuKEtQr2jiL2Da1K++6VRXl79htk1Rw2vHMeDRrz/XTs364gyPPTLOdtVTrrhIwWxWprw7NXHfrvVHZt10XmSpC3ZKpQm1REjeh0gXBT6hbnPiJWzA7QyDk7GhO4D0v0vgAWYHgEU6q8HSIcArOraCPeDBcmlxPC4ldf3ZoRVVogic5rbwL+3OHW6JXaFh3WRs4xiX5CqPQAguZmIPRMHQfY7IkjGbfxJQlCNTAmFsWsAbVnyvLt3/EYO17VSK74M15/1ucOdtQeqFeWdeg3vD94fFVv8Tv2TDRzAcrtENdXuYvSaSd+7oBAAA="
    },
    "Metadata": {
     "aws:cdk:path": "fana-shared-resources/CDKMetadata/Default"
@@ -873,6 +835,36 @@
     "Name": "fana-shared-resources:ExportsOutputFnGetAttfanaDBA214E5A4EndpointPortA2F54514"
    }
   },
+  "ExportsOutputReffanavpc71F92CF5BBA8AEF7": {
+   "Value": {
+    "Ref": "fanavpc71F92CF5"
+   },
+   "Export": {
+    "Name": "fana-shared-resources:ExportsOutputReffanavpc71F92CF5BBA8AEF7"
+   }
+  },
+  "ExportsOutputFnGetAttfanaDBSecurityGroupC50F2AF4GroupId38F92506": {
+   "Value": {
+    "Fn::GetAtt": [
+     "fanaDBSecurityGroupC50F2AF4",
+     "GroupId"
+    ]
+   },
+   "Export": {
+    "Name": "fana-shared-resources:ExportsOutputFnGetAttfanaDBSecurityGroupC50F2AF4GroupId38F92506"
+   }
+  },
+  "ExportsOutputFnGetAttfanaredistestSGfanaredistest8F8EE3FCGroupIdEEC67E99": {
+   "Value": {
+    "Fn::GetAtt": [
+     "fanaredistestSGfanaredistest8F8EE3FC",
+     "GroupId"
+    ]
+   },
+   "Export": {
+    "Name": "fana-shared-resources:ExportsOutputFnGetAttfanaredistestSGfanaredistest8F8EE3FCGroupIdEEC67E99"
+   }
+  },
   "ExportsOutputReffanaclusterB441A15AC8EDF09F": {
    "Value": {
     "Ref": "fanaclusterB441A15A"
@@ -895,14 +887,6 @@
    },
    "Export": {
     "Name": "fana-shared-resources:ExportsOutputReffanavpcPrivateSubnet2Subnet5043D2161B070C6D"
-   }
-  },
-  "ExportsOutputReffanavpc71F92CF5BBA8AEF7": {
-   "Value": {
-    "Ref": "fanavpc71F92CF5"
-   },
-   "Export": {
-    "Name": "fana-shared-resources:ExportsOutputReffanavpc71F92CF5BBA8AEF7"
    }
   }
  },
