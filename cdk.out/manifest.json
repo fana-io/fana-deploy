@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/2afb7b396f79463d6d84a1c2fdd012810e0f06bc29ad79258a7b81a6e4948bf8.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/a934919e9d0c908469efd40e04d793e3707dee84c26ba913ff4db3bc4122a15e.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -201,6 +201,12 @@
             "data": "fanaredistestfanaredistestclusterD26287DD"
           }
         ],
+        "/fana-shared-resources/SG-fana-shared-resources/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SGfanasharedresourcesBC3AADF0"
+          }
+        ],
         "/fana-shared-resources/fanaDB/SubnetGroup/Default": [
           {
             "type": "aws:cdk:logicalId",
@@ -322,7 +328,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/4dc041bb7cdf50ad39bdf00ea91ea827862e321b9e7590802e35e6ab0049c4d6.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/507a7c56901b12ff8efeb800c9308025c15dfe5e50759940737a435efdabfd18.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [

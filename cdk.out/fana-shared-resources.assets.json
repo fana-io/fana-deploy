@@ -1,7 +1,7 @@
 {
   "version": "20.0.0",
   "files": {
-    "2afb7b396f79463d6d84a1c2fdd012810e0f06bc29ad79258a7b81a6e4948bf8": {
+    "a934919e9d0c908469efd40e04d793e3707dee84c26ba913ff4db3bc4122a15e": {
       "source": {
         "path": "fana-shared-resources.template.json",
         "packaging": "file"
@@ -9,7 +9,7 @@
       "destinations": {
         "current_account-current_region": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "2afb7b396f79463d6d84a1c2fdd012810e0f06bc29ad79258a7b81a6e4948bf8.json",
+          "objectKey": "a934919e9d0c908469efd40e04d793e3707dee84c26ba913ff4db3bc4122a15e.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }

@@ -308,7 +308,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/12QTw+CMAzFP4v3MRU18a7RiwcD3s0chVTGaraBIWTf3fFHo576+ntp+9KYr9Z8MRNPG8msjBTeeJc6IUsW0LUDaXl3EKYQDi7ClnvIUaND0myX639C2gnUYL7YNJuCaVBCPzRJz1BUvEtIDXSoZ1Io274dlWeKihDgRMXRUP3onbf2DGQcsoKsDbr24/8A74fdYKk24/WQMRuSeaYpA36382a55Zvwg7tFjEytHVbAk7G+AE21wpMfAQAA"
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/12O3QrCMAyFn2X3XZ1TfAFFb7yQzXupXTayn0babjJG393uR1EhcE6+kOTEfLPlUSCeJpRZFdZ450NqhayYR7cBpOHDUehCWLgKUx0gR4UWSbF9rv4JKStQgf5iy24KukMJ49JiHUPR8CGheqKTXqhG2Y/t7ByrqfABzlScNLWPcfL2joGMfVaQrUbbf+Y/wLnpNhhq9fzdZ8ymZI4pyoCXZtWtd9xXFJQGMdStstgAT2Z9ATEKjacgAQAA"
    },
    "Metadata": {
     "aws:cdk:path": "FanaPlatformStack/CDKMetadata/Default"
