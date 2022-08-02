@@ -11,16 +11,7 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app. The build ste
 * `cdk diff`             compare deployed stack with current state
 * `cdk synth`            emits the synthesized CloudFormation template
 
-## Dev Notes:
-- All I did so far to create this:
-  - Pre-req:
-    - Configure aws cli
-    - Bootstrapping: allows containers to be available to AWS CloudFormation during deployment
-      `cdk bootstrap aws://ACCOUNT-NUMBER/REGION`
-  - Initialize cdk app: `cdk init app --language javascript`
-  - copied Fjord's 'SharedResources.js' into our `mainResources.js` to get started :P 
-    - was trying to figure out the VIP stuff today. They use NAT Gateway, but we don't. So maybe it's just 
-
+## Dev Notes
 - AWS CDK Toolkit (CLI) is the main tool used to interact with your AWS CDK app;
   - executes your code
   - produces and deploys the AWS CloudFormation templates
