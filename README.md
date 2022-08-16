@@ -1,5 +1,5 @@
 # Deploying Fana
-There are two options to deploy Fana and get started quickly. 
+There are two options to deploy Fana to get started quickly. 
 - Self-hosted or local development: Developers interested in using Fana in a self-hosted environment (non-AWS) or are interested in testing out Fana in their local development environment can deploy the entire Fana stack with one command using Docker. 
 - Cloud deployment: Developers that are already familiar with the AWS environment can quickly deploy the Fana stack using the provided AWS Cloud Development Kit (CDK) template.
 
@@ -8,9 +8,11 @@ This option works well for teams that want to test Fana out in a local developem
 
 1. Navigate to the `Fana-Docker` directory.
 2. Create an `.env` file for the following environment variable configurations:
-
+ TODO
 3. To deploy, run the following command in the same directory as the `docker-compose.yml`: 
 ```bash
+$ cd Fana-Docker
+$ touch .env
 $ docker-compose up -d
 ```
 
