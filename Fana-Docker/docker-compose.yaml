@@ -1,0 +1,58 @@
+version: '3'
+
+services:
+  manager:
+    image: 'fanaff/manager-static:latest'
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=postgres
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_PW=postgres
+      - DB_PORT=5432
+      - PORT=3000
+      - REDIS_PORT=6379
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_DB=${REDIS_DB}
+      - REDIS_PW=${REDIS_PW}
+      - SECS_TO_EXPIRE=1000000s
+    depends_on:
+      - postgres
+      - redis
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - fana-postgres-data:/var/lib/postgresql/data/pgdata
+    environment:
+      - POSTGRES_PASSWORD=${DB_PW}
+      - PGDATA=/var/lib/postgresql/data/pgdata
+  redis:
+    image: redis
+    hostname: my-redis
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_PW=${REDIS_PW}
+    command: redis-server --requirepass mypassword
+  flag-bearer:
+    image: fanaff/fana-flag-bearer:latest
+    container_name: flag-bearer
+    ports:
+      - "3001:3001"
+    links:
+      - redis
+      - manager
+    depends_on:
+      - redis
+      - manager
+    environment:
+      - PORT=3001
+      - REDIS_PORT=6379
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PW=${REDIS_PW}
+      - MANAGER_URI=http://manager:3000
+volumes:
+  fana-postgres-data:
