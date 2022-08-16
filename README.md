@@ -1,3 +1,4 @@
+![Fana logo](assets/fana_logo_color_forwhitebg.png)
 # Deploying Fana
 There are two options to deploy Fana to get started quickly. 
 - Self-hosted or local development: Developers interested in using Fana in a self-hosted environment (non-AWS) or are interested in testing out Fana in their local development environment can deploy the entire Fana stack with one command using Docker. 
