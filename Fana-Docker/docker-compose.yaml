@@ -2,7 +2,7 @@ version: '3'
 
 services:
   manager:
-    image: 'fanaff/manager-static:latest'
+    image: 'fanaff/manager-static:1.6'
     ports:
       - "3000:3000"
     environment:
@@ -38,7 +38,7 @@ services:
       - REDIS_PW=${REDIS_PW}
     command: redis-server --requirepass mypassword
   flag-bearer:
-    image: fanaff/fana-flag-bearer:latest
+    image: 'fanaff/fana-flag-bearer:1.1'
     container_name: flag-bearer
     ports:
       - "3001:3001"
