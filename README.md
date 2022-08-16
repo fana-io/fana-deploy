@@ -1,8 +1,8 @@
 ![Fana logo](assets/fana_logo_color_forwhitebg.png)
 # Deploying Fana
 There are two options to deploy Fana to get started quickly. 
-- Self-hosted or local development: Developers interested in using Fana in a self-hosted environment (non-AWS) or are interested in testing out Fana in their local development environment can deploy the entire Fana stack with one command using Docker. 
-- Cloud deployment: Developers that are already familiar with the AWS environment can quickly deploy the Fana stack using the provided AWS Cloud Development Kit (CDK) template.
+- [Docker](#using-docker): Developers interested in using Fana in a self-hosted environment (non-AWS) or are interested in testing out Fana in their local development environment can deploy the entire Fana stack with one command using Docker. 
+- [Cloud deployment](#using-fanas-javascript-cdk): Developers that are already familiar with the AWS environment can quickly deploy the Fana stack using the provided AWS Cloud Development Kit (CDK) template.
 
 ## Using Docker
 This option works well for teams that want to test Fana out in a local developement environment or would like to run Fana on self-hosted infrastructure.  
@@ -16,6 +16,7 @@ $ cd Fana-Docker
 ```bash
 $ docker-compose up -d
 ```
+4. Navigate to `localhost:3000` to access the developer dashboard. The Flag Bearer is available for SDK connections at `localhost:3001`.
 
 ## Using Fana's Javascript CDK
 Fana's CDK uses the Elastic Container Services hosted on AWS Fargate, a serverless, pay as you go compute engine. 
@@ -41,7 +42,7 @@ $ cdk list
 ```bash
 $ cdk deploy --all
 ```
-4. Use the load balancer DNS output to access the UI dashboard. Port over the URI into the SDKs configuration to specify Flag Bearer endpoint.
+4. Use the load balancer DNS output to access the UI dashboard. Port over the load balancer URI into the SDKs configuration to specify Flag Bearer endpoint.
 
 ### Resources Deployed
 There are two different stacks defined in our CDK: 
@@ -54,7 +55,7 @@ There are two different stacks defined in our CDK:
 
 2. `FanaPlatformStack` includes:
   - the Fana Manager and Bearer containers defined as tasks for the Fargate service,
-  - the load balancer configured with listener rules, and
+  - the application load balancer configured with listener rules, and
   - the security groups. 
 
 The `fana-shared-resources` are referenced in the `FanaPlatformStack`.
