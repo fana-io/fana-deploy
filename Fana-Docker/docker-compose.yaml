@@ -9,7 +9,7 @@ services:
       - DB_HOST=postgres
       - DB_NAME=postgres
       - DB_USER=postgres
-      - DB_PW=postgres
+      - DB_PW=${DB_PW}
       - DB_PORT=5432
       - PORT=3000
       - REDIS_PORT=6379
