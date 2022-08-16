@@ -8,12 +8,12 @@ There are two options to deploy Fana to get started quickly.
 This option works well for teams that want to test Fana out in a local developement environment or would like to run Fana on self-hosted infrastructure.  
 
 1. Navigate to the `Fana-Docker` directory.
-2. Create an `.env` file for the following environment variable configurations:
- TODO
-3. To deploy, run the following command in the same directory as the `docker-compose.yml`: 
 ```bash
 $ cd Fana-Docker
-$ touch .env
+```
+2. Edit the`.env` file to the appropriate environment variable configurations for connecting to the PostgreSQL database. A template `.env` with defaults has been provided.
+3. To deploy, run the following command in the same directory as the `docker-compose.yml`: 
+```bash
 $ docker-compose up -d
 ```
 
@@ -25,7 +25,7 @@ To use the CDK App, you need the following:
 - Bootstrap (create dedicated Amazon S3 buckets and other containers to be available to AWS CloudFormation during deployment) using:
 ```bash
 $ npm install -g aws-cdk
-$ cdk boostrap aws://ACCOUNT-NUMBER/REGION
+$ cdk boostrap aws://YOUR-ACCOUNT-NUMBER/YOUR-REGION
 ```
 
 ## Deploy Fana App
@@ -41,7 +41,7 @@ $ cdk list
 ```bash
 $ cdk deploy --all
 ```
-4. Use the load balancer DNS output to access the UI dashboard. Paste the URI in the SDKs to specify Flag Bearer endpoint.
+4. Use the load balancer DNS output to access the UI dashboard. Port over the URI into the SDKs configuration to specify Flag Bearer endpoint.
 
 ### Resources Deployed
 There are two different stacks defined in our CDK: 
